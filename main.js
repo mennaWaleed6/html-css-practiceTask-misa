@@ -1,38 +1,3 @@
-const swiper = new Swiper(".slider-content", {
-  rtl: true,
-  loop: true,
-  grabCursor: true,
-  rewind: true,
-
-  // If we need pagination
-  pagination: {
-    el: ".swiper-pagination",
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-
-  breakpoints: {
-    0: {
-      slidesPerView: 2,
-      spaceBetween: 10,
-    },
-    620: {
-      slidesPerView: 3,
-      spaceBetween: 15,
-    },
-    768: {
-      slidesPerView: 4,
-    },
-    1024: {
-      slidesPerView: 4,
-    },
-  },
-});
-
 let profileIndex = 1;
 showProfiles(profileIndex);
 
@@ -100,5 +65,24 @@ video.addEventListener("click", () => {
     video.pause();
   }
 });
+btn.addEventListener("click", () => {
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
+});
 video.addEventListener("play", () => box.classList.add("playing"));
 video.addEventListener("pause", () => box.classList.remove("playing"));
+
+function scrollCarousel(distance) {
+  const container = document.getElementById("scrollTarget");
+  // scrollBy(x-coordinate, y-coordinate)
+  const cardWidth = container.querySelector(".card").offsetWidth + 20;
+  distance = distance > 0 ? cardWidth : -cardWidth;
+
+  container.scrollBy({
+    left: distance,
+    behavior: "smooth",
+  });
+}
